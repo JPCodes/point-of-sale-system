@@ -11,8 +11,8 @@ get('/') do
 end
 
 get('/management') do
+  @antiques_available = Antique.where(purchased: false)
   @antiques = Antique.all()
-  @antiques_not_purchased = Antique.where(purchased: false)
   erb(:management)
 end
 
@@ -20,6 +20,7 @@ post('/antique-order-form') do
   name = params.fetch('antique_name')
   price = params.fetch('antique_price')
   Antique.create({:name => name, :price => price, :purchase_id => nil, :purchased => false})
+  @antiques_available = Antique.where(purchased: false)
   @antiques = Antique.all()
   erb(:management)
 end

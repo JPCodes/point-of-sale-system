@@ -1,14 +1,5 @@
+<p><a href="/">Home</a></p>
 <h1>Manager Portal</h1>
-
-<% if @antiques.any? %>
-<ul>
-  <% @antiques.each do |antique| %>
-    <li><a href="/antique/<%= antique.id %>"><%= antique.name %></a></li>
-  <% end %>
-</ul>
-<% else %>
-<p>You have no antiques</p>
-<% end %>
 
 <h3>Antique Order Form</h3>
 <form class="" action="/antique-order-form" method="post">
@@ -19,4 +10,31 @@
   <button type="submit" class="btn btn-primary">Order antique</button>
 </form>
 
-<p><a href="/">Home</a></p>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Inventory of all items</h2>
+    <% if @antiques.any? %>
+    <ul>
+      <% @antiques.each do |antique| %>
+      <li><a href="/antique/<%= antique.id %>"><%= antique.name %></a></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>You have no antiques</p>
+    <% end %>
+
+
+  </div>
+  <div class="col-md-6">
+    <h2>Inventory of all items not purchased</h2>
+    <% if !@antiques_available.any? %>
+    <p>You have no available antiques</p>
+    <% else %>
+      <ul>
+        <% @antiques_available.each do |antique| %>
+        <li><a href="/antique/<%= antique.id %>"><%= antique.name %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
