@@ -9,7 +9,7 @@ class Purchase < ActiveRecord::Base
     purchase_price = 0
     purchase_items.each do |antique|
       current_antique = Antique.find(antique.to_i)
-      current_antique.update({:purchase_id => self.id})
+      current_antique.update({:purchase_id => self.id, :purchased => true})
       purchase_price += current_antique.price
     end
     self.update({:total => purchase_price})
