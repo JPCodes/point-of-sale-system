@@ -6,7 +6,7 @@
 <% else %>
   <form action="/register" method="post">
     <% @antiques.each do |antique| %>
-      <input type="checkbox" name="antique" value="<%=antique.id%>"> <label><%=antique.name%></label><br>
+      <input type="checkbox" name="antique[]" value="<%=antique.id%>"> <label><%=antique.name%>: <%=antique.price%>0</label><br>
     <% end %>
     <button class="btn btn-primary" type="submit" name="button">Submit</button>
   </form>

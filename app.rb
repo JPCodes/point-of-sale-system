@@ -30,10 +30,10 @@ get('/cashier') do
 end
 
 post('/register') do
-  purchase_items = []
-  # purchase_items = purchase_items.push(antique.each())
-  total = purchase_items.total_price()
-  Purchase.create({:total_price => total})
+  @purchase_items = params.fetch('antique')
+  current_purchase = Purchase.create({:total => 0, :time_of_purchase => '01:15:00'})
+  current_purchase.total_price(@purchase_items)
+
   @antiques = Antique.all()
   erb(:cashier)
 end
