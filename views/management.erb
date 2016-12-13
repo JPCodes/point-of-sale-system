@@ -1,0 +1,22 @@
+<h1>Manager Portal</h1>
+
+<% if @antiques.any? %>
+<ul>
+  <% @antiques.each do |antique| %>
+    <li><a href="/antique/<%= antique.id %>"><%= antique.name %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p>You have no antiques</p>
+<% end %>
+
+<h3>Antique Order Form</h3>
+<form class="" action="/antique-order-form" method="post">
+  <label for="antique_name">Antique Name</label>
+  <input type="text" name="antique_name" id="antique_name" class="form-control" required>
+  <label for="antique_price">Price</label>
+  <input type="text" name="antique_price" id="antique_price" class="form-control" required> <br>
+  <button type="submit" class="btn btn-primary">Order antique</button>
+</form>
+
+<p><a href="/">Home</a></p>

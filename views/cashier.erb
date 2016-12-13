@@ -1,0 +1,13 @@
+<p><a href="/">Home</a></p>
+<h2>Cashier</h2>
+
+<% if !@antiques.any? %>
+  <h3>You have no antiques</h3>
+<% else %>
+  <form action="/register" method="post">
+    <% @antiques.each do |antique| %>
+      <input type="checkbox" name="antique" value="<%=antique.id%>"> <label><%=antique.name%></label><br>
+    <% end %>
+    <button class="btn btn-primary" type="submit" name="button">Submit</button>
+  </form>
+<% end %>
