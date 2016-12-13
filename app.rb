@@ -42,3 +42,24 @@ post('/register') do
   @antiques = Antique.where(purchased: false)
   erb(:cashier)
 end
+
+get('/antique/:id') do
+  @antique = Antique.find(params.fetch("id").to_i)
+  erb(:antique)
+end
+
+patch('/antique/update/:id') do
+  @antique = Antique.find(params.fetch("id").to_i)
+  name = params.fetch('name')
+  price = params.fetch('price')
+  @antique.update({:name => name, :price => price})
+  erb(:antique)
+end
+
+delete('/antique/delete/:id') do
+  @antique = Antique.find(params.fetch("id").to_i)
+  @antiques = Antique.all()
+  @antiques_available = Antique.where(purchased: false)
+  @antique.delete()
+  erb(:management)
+end
