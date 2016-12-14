@@ -1,0 +1,23 @@
+<h2>Date range</h2>
+
+<form action="/DateTime_form" method="post">
+  <label for="date_one">First Date</label>
+  <input type="datetime-local" name="date_one" id="date_one" required>
+  <label for="date_two">Second Date</label>
+  <input type="datetime-local" name="date_two" id="date_two" required>
+  <button type="submit" class="btn btn-success">Search</button>
+</form>
+
+<% if @purchases.nil?  %>
+  <p>No purchases found.</p>
+<% else %>
+ <ul>
+  <% @purchases.each do |antique| %>
+    <% antique.each do |inner_antique| %>
+    <li><%= inner_antique.name() %></li>
+    <% end %>
+  <% end %>
+</ul>
+<% end %>
+
+<p><a href="/">Home</a></p>

@@ -7,7 +7,21 @@ require('./lib/antique')
 require('pg')
 
 get('/') do
-  erb(:index)
+  # adam = Purchase.between('2016-12-13 14:29:00', '2016-12-13 14:42:00')
+  # puts adam
+   erb(:index)
+end
+
+get('/management/purchased_between') do
+  erb(:purchased_between)
+end
+
+post('/DateTime_form') do
+  date_one = params.fetch('date_one')
+  date_two = params.fetch('date_two')
+  @purchases = Purchase.between(date_one, date_two)
+
+  erb(:purchased_between)
 end
 
 get('/management') do
@@ -52,8 +66,11 @@ patch('/antique/update/:id') do
   @antique = Antique.find(params.fetch("id").to_i)
   name = params.fetch('name')
   price = params.fetch('price')
-  @antique.update({:name => name, :price => price})
-  erb(:antique)
+  if @antique.update({:name => name, :price => price})
+    erb(:antique)
+  else
+    erb(:errors)
+  end
 end
 
 delete('/antique/delete/:id') do
